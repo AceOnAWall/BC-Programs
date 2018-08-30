@@ -1,0 +1,66 @@
+# Author: Wallace, Ryan
+# Date submitted: 2018/04/03
+# Course: COMP B13, Spring 2018
+# Instructor: Richard Miles
+# Programming Assignment #4
+
+# A
+
+addi $t0, $zero, 5000
+addi $t1, $zero, 5004
+addi $t2, $zero, 5			# X = 5
+addi $t3, $zero, 0			# Y = 0
+sw $t2, 0($t0)
+sw $t3, 0($t1)
+While:
+bge $t3, $t2, After			# While (Y < X)
+addi $t4, $zero, 2			# Creates temp value of 2
+mul $t3, $t2, $t4			# Y = (X * 2)
+addi $t2, $t2, -1			# Increments X -1
+sw $t3, 0($t1)
+sw $t2, 0($t0)
+j While
+After:
+
+# B 
+
+addi $t0, $zero, 5000
+addi $t1, $zero, 5004
+addi $t2, $zero, 5008
+addi $t3, $zero, 10
+addi $t4, $zero, 0
+addi $t5, $zero, 0
+sw $t3, 0($t0)			# Y = 10
+sw $t4, 0($t1)			# sum = 0
+sw $t5, 0($t2)			# i = 0
+While:
+bge $t5, $t3, After			# While (i < Y)
+add $t4, $t4, $t5			# sum = sum + i
+addi $t5, $t5, 1			# i++
+sw $t4, 0($t1)
+sw $t5, 0($t2)
+j While
+After: 
+
+# C
+
+slt $t3, $t1, $t0			# Set $t3 to 1 if X < Y
+beq $t3, $zero, YMin		# Branch if Y < X
+add $t2, $zero, $t1			# X is Min 
+sw $t2, 0($sp)				# Stores X into $sp for return
+j After
+YMin: 
+add $t2, $zero, $t0		# Y is Min
+sw $t2, 0($sp)			# Stores Y into $sp for return
+After: jr $ra
+
+# D
+
+ConvCToF:
+lw $t0, 4($sp)			# Make space for parameter in stack
+addi $t1, $zero, 2			# Create temp value (should be 1.8)
+addi $t2, $zero, 32			# Create temp value 
+mul $t3, $t0, $t1			# (Ftemp * 2)
+add $t3, $t3, $t2			# (Ftemp * 2) + (32)
+sw $t3, 0($sp)			# Stores CTemp in the stack for return
+ConvCToFEnd: jr $ra

@@ -1,0 +1,61 @@
+# Author: Wallace, Ryan
+# Date submitted: 2018/04/15
+# Course: COMP B13, Spring 2018
+# Instructor: Richard Miles
+# Programming Assignment #2
+
+# A
+addi $t0, $zero, 5000
+addi $t1, $zero, 15    # X
+sw $t1, 0($t0)
+
+# B
+addi $t0, $zero, 5000
+addi $t1, $zero, 5004
+addi $t3, $zero, 5008
+addi $t2, $zero, 0     # Z
+addi $t4, $zero, 25    # X
+addi $t5, $zero, 75    # Y
+sw $t6, 0($t3)
+sw $t4, 0($t0)
+sw $t5, 0($t1)
+add $t2, $t4, $t5      # Z = X+Y
+
+# C
+addi $t0, $zero, 5000
+addi $t2, $zero, 5004
+addi $t1, $zero, 37    # X
+addi $t3, $zero, 0     # Y
+sw $t1, 0($t0)
+sw $t3, 0($t2)
+addi $t1, $t1, 19      # X + 19
+add $t3, $t1, $zero    # Y = (x)
+
+# D
+addi $t0, $zero, 5000
+addi $t1, $zero, 5004
+addi $t2, $zero, 5008
+addi $t3, $zero, 4
+addi $t4, $zero, 3
+addi $t5, $zero, 2
+sw $t3, 0($t0)            # X
+sw $t4, 0($t1)            # Y
+sw $t5, 0($t2)            # Z
+addi $t6, $zero, 5        # temp value 
+mul $t6, $t5, $t6         # (5 * Z) saving registers
+mul $t3, $t3, $t4         # (X * Y) saving registers
+add $t5, $t3, $t6         # Z = X * Y + (5 * Z)
+
+# E (last 3 lines contain errors)
+addi $t0, $zero, 5000
+addi $t1, $zero, 5004
+addi $t2, $zero, 5008
+addi $t3, $zero, 0
+addi $t4, $zero, 31
+addi $t5, $zero, 13
+sw $t3, 0($t0)          # TEMP
+sw $t4, 0($t1)          # X
+sw $t5, 0($t2)          # Y
+lw $t3, 0($t1)          # TEMP = X
+lw $t5, 0($t1)          # Y = X
+lw $t4, 0($t0)          # X = TEMP

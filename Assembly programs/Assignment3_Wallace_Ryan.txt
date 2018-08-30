@@ -1,0 +1,95 @@
+# Author: aallace, Ryan
+# Date submitted: 2018/04/ 22
+# Course: COMP B13, Spring 2018
+# Instructor: Richard Miles
+# Programming Assignment #3
+
+# A
+
+addi $t0, $zero, 5000
+addi $t1, $zero, 5004
+addi $t2, $zero, 5008
+addi $t3, $zero, 46			# A
+addi $t4, $zero, 62			# B
+addi $t5, $zero, 0			# C
+sw $t3, 0($t0)
+sw $t4, 0($t1)
+sw $t5, 0($t2)
+addi $t3, $t3, 1			# A + 1
+addi $t4, $t4, 2			# B + 2
+mul $t5, $t3, $t4			# C = (A+1) * (B+2)
+sw $t5, 0($t2)
+
+# B
+
+addi $t0, $zero, 5000
+addi $t1, $zero, 5004
+addi $t2, $zero, 2			# X
+addi $t3, $zero, 0			# W
+sw $t2, 0($t0)
+sw $t3, 0($t1)
+bne $t2, $zero, After		# if (x == W)
+addi $t3, $t3, 100			# W = W + 10
+sw $t3, 0($t1)
+After: 
+
+# C
+
+addi $t0, $zero, 5000
+addi $t1, $zero, 5004
+addi $t2, $zero, 5008
+addi $t3, $zero, 5012
+addi $t4, $zero, 0			# W
+addi $t5, $zero, 0			# X
+addi $t6, $zero, 1			# Y
+addi $ra, $zero, 0			# Z (I had to use $ra because I ran out of num registers)
+sw $t4, 0($t0)
+sw $t5, 0($t1)
+sw $t6, 0($t2)
+sw $ra, 0($t3)
+bne $t5, $t6, Elif1			# if (x = Y)
+addi $t4, $zero, 1			# W = 1
+sw $t4, 0($t0)
+Elif1: bne $t6, $ra, Elif2	# else if (y == Z)
+addi $t4, $zero, 2			# W = 2
+sw $t4, 0($t0)
+Elif2: bne $t5, $ra, After	# else if (X = Z)
+addi $t4, $zero, 3			# W = 3
+sw $t4, 0($t0)
+After:
+
+# D
+
+addi $t0, $zero, 5000
+addi $t1, $zero, 5004
+addi $t2, $zero, 5008
+addi $t3, $zero, 1			# X
+addi $t4, $zero, 1			# Y
+addi $t5, $zero, 0			# Z
+sw $t3, 0($t0)
+sw $t4, 0($t1)
+sw $t5, 0($t2)
+bne $t3, $zero, Elif		# if (X = 0)
+addi $t5, $zero, -1			# Z = -1	
+sw $t5, 0($t2)
+Elif: bne $t4, $zero, Else	# else if (Y = 0)
+addi $t5, $zero, -2			# Z = -2
+sw $t5, 0($t2)
+Else: addi $t5, $zero, -3	# else: Z = -3
+sw $t5, 0($t2)
+
+# E
+
+addi $t0, $zero, 5000
+addi $t1, $zero, 5004
+addi $t2, $zero, 5008
+addi $t3, $zero, 1			# X
+addi $t4, $zero, 1			# Y       
+addi $t5, $zero, 0			# Z      
+sw $t3, 0($t0)
+sw $t4, 0($t1)
+sw $t5, 0($t2)
+bgt $t3, $t4, After			# if (X <= Y)
+addi $t5, $zero, -1			# Z = -1
+sw $t5, 0($t2)
+After: 
